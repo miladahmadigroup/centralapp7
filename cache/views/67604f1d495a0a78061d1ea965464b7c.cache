@@ -1,0 +1,255 @@
+a:5:{s:4:"html";s:10900:"
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">ثبت‌نام</h5>
+    </div>
+    <div class="card-body">
+        <!-- فرم ثبت‌نام -->
+        <form id="registerForm" style="display: block;">
+            <div class="mb-3">
+                <label class="form-label">نام کامل <span class="text-danger">*</span></label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">ایمیل <span class="text-danger">*</span></label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">شماره موبایل <span class="text-danger">*</span></label>
+                <input type="text" name="mobile" class="form-control" placeholder="09123456789" required>
+                <small class="text-muted">11 رقم و با 09 شروع شود</small>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">رمز عبور <span class="text-danger">*</span></label>
+                <input type="password" name="password" class="form-control" required>
+                <small class="text-muted">حداقل 6 کاراکتر</small>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">تکرار رمز عبور <span class="text-danger">*</span></label>
+                <input type="password" name="password_confirm" class="form-control" required>
+            </div>
+            
+            <!-- کپچا -->
+            <div class="mb-3">
+                <label class="form-label">کد تصویر <span class="text-danger">*</span></label>
+                <div class="d-flex align-items-center gap-2">
+                    <input type="text" name="captcha" class="form-control" style="flex: 1;" required placeholder="کد تصویر را وارد کنید">
+                    <img id="captchaImage" src="" alt="کپچا" style="border: 1px solid #ddd; border-radius: 4px; cursor: pointer;" onclick="refreshCaptcha()">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="refreshCaptcha()">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                <small class="text-muted">روی تصویر کلیک کنید تا تازه شود</small>
+            </div>
+            
+                        
+            <button type="submit" class="btn btn-primary w-100">ثبت‌نام</button>
+        </form>
+        
+        <!-- فرم تأیید ایمیل -->
+        <div id="verificationForm" style="display: none;">
+            <div class="alert alert-info">
+                <i class="fas fa-envelope me-2"></i>
+                کد تأیید به ایمیل شما ارسال شد. لطفاً آن را در زیر وارد کنید.
+            </div>
+            
+            <form id="emailVerificationForm">
+                <input type="hidden" id="verificationUserId" name="user_id">
+                
+                <div class="mb-3">
+                    <label class="form-label">کد تأیید (6 رقم)</label>
+                    <input type="text" name="code" class="form-control text-center" maxlength="6" required placeholder="963741">
+                    <small class="text-muted">کد تست: 963741</small>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">تأیید و فعال‌سازی حساب</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="resendVerification()">
+                        ارسال مجدد کد
+                    </button>
+                    <button type="button" class="btn btn-link" onclick="showRegisterForm()">
+                        بازگشت به ثبت‌نام
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="registerResult" class="mt-3"></div>
+    </div>
+</div>
+
+<script>
+let currentUserId = null;
+
+// بارگذاری کپچا هنگام شروع
+document.addEventListener('DOMContentLoaded', function() {
+    refreshCaptcha();
+});
+
+// تولید کپچای جدید
+function refreshCaptcha() {
+    if (window.callCentralAPI) {
+        window.callCentralAPI('user-management', 'captcha', {})
+            .then(response => {
+                if (response.success) {
+                    document.getElementById('captchaImage').src = response.captcha;
+                } else {
+                    console.error('خطا در بارگذاری کپچا:', response.message);
+                }
+            })
+            .catch(error => {
+                console.error('خطا در ارتباط با سرور کپچا:', error);
+            });
+    }
+}
+
+// مدیریت فرم ثبت‌نام
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    // بررسی تطابق رمز عبور
+    if (data.password !== data.password_confirm) {
+        showRegisterError('رمز عبور و تکرار آن باید یکسان باشند');
+        return;
+    }
+    
+    // بررسی موبایل
+    if (!/^09\d{9}$/.test(data.mobile)) {
+        showRegisterError('شماره موبایل باید 11 رقم و با 09 شروع شود');
+        return;
+    }
+    
+    // حذف فیلد تکرار رمز
+    delete data.password_confirm;
+    
+    if (window.callCentralAPI) {
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'در حال ثبت‌نام...';
+        submitBtn.disabled = true;
+        
+        window.callCentralAPI('user-management', 'register', data)
+            .then(response => {
+                if (response.success) {
+                    if (response.data.verification_required) {
+                        // نمایش فرم تأیید
+                        currentUserId = response.data.user_id;
+                        document.getElementById('verificationUserId').value = currentUserId;
+                        showVerificationForm();
+                        showRegisterSuccess('ثبت‌نام انجام شد. کد تأیید به ایمیل شما ارسال شد.');
+                    } else {
+                        showRegisterSuccess(response.message);
+                        this.reset();
+                        refreshCaptcha();
+                    }
+                } else {
+                    showRegisterError(response.message);
+                    refreshCaptcha(); // تازه کردن کپچا در صورت خطا
+                }
+            })
+            .catch(error => {
+                showRegisterError('خطا در ارتباط با سرور: ' + error.message);
+                refreshCaptcha();
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+    } else {
+        alert('تابع callCentralAPI موجود نیست');
+    }
+});
+
+// مدیریت فرم تأیید ایمیل
+document.getElementById('emailVerificationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    if (window.callCentralAPI) {
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'در حال تأیید...';
+        submitBtn.disabled = true;
+        
+        window.callCentralAPI('user-management', 'verify-email', data)
+            .then(response => {
+                if (response.success) {
+                    showRegisterSuccess(response.message + ' اکنون می‌توانید وارد شوید.');
+                    
+                    // بازگشت به فرم ثبت‌نام پس از 3 ثانیه
+                    setTimeout(() => {
+                        showRegisterForm();
+                        document.getElementById('registerForm').reset();
+                        refreshCaptcha();
+                    }, 3000);
+                } else {
+                    showRegisterError(response.message);
+                }
+            })
+            .catch(error => {
+                showRegisterError('خطا در تأیید: ' + error.message);
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+    }
+});
+
+// ارسال مجدد کد تأیید
+function resendVerification() {
+    if (!currentUserId) {
+        showRegisterError('شناسه کاربر یافت نشد');
+        return;
+    }
+    
+    if (window.callCentralAPI) {
+        window.callCentralAPI('user-management', 'resend-verification', {user_id: currentUserId})
+            .then(response => {
+                if (response.success) {
+                    showRegisterSuccess(response.message);
+                } else {
+                    showRegisterError(response.message);
+                }
+            })
+            .catch(error => {
+                showRegisterError('خطا در ارسال مجدد: ' + error.message);
+            });
+    }
+}
+
+// نمایش فرم‌ها
+function showRegisterForm() {
+    document.getElementById('registerForm').style.display = 'block';
+    document.getElementById('verificationForm').style.display = 'none';
+    document.getElementById('registerResult').innerHTML = '';
+}
+
+function showVerificationForm() {
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('verificationForm').style.display = 'block';
+}
+
+// نمایش پیام‌ها
+function showRegisterError(message) {
+    const resultDiv = document.getElementById('registerResult');
+    if (resultDiv) {
+        resultDiv.innerHTML = '<div class="alert alert-danger"><i class="fas fa-exclamation-triangle me-2"></i>' + message + '</div>';
+    }
+}
+
+function showRegisterSuccess(message) {
+    const resultDiv = document.getElementById('registerResult');
+    if (resultDiv) {
+        resultDiv.innerHTML = '<div class="alert alert-success"><i class="fas fa-check-circle me-2"></i>' + message + '</div>';
+    }
+}";s:7:"expires";i:1755465970;s:7:"created";i:1755462370;s:6:"plugin";s:15:"user-management";s:4:"view";s:8:"register";}

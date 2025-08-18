@@ -1,0 +1,382 @@
+/* استایل‌های عمومی اپ مرکزی */
+
+/* Typography */
+body {
+    font-family: 'Vazir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+/* Utility Classes */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bg-gradient-success {
+    background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+}
+
+.bg-gradient-info {
+    background: linear-gradient(135deg, #3ca55c 0%, #b5ac49 100%);
+}
+
+.bg-gradient-warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    border-radius: 0.75rem 0.75rem 0 0 !important;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+    border: none;
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #3ca55c 0%, #b5ac49 100%);
+    border: none;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border: none;
+}
+
+/* Form Controls */
+.form-control {
+    border-radius: 0.5rem;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+/* Alerts */
+.alert {
+    border: none;
+    border-radius: 0.75rem;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    color: #155724;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da 0%, #f1aeb5 100%);
+    color: #721c24;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    color: #856404;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+    color: #0c5460;
+}
+
+/* Navigation */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    transform: translateY(-1px);
+}
+
+/* Jumbotron */
+.jumbotron {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+/* Loading States */
+.spinner-border {
+    border-width: 2px;
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 2px;
+}
+
+/* Tables */
+.table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Badge */
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.75em;
+}
+
+/* Modal */
+.modal-content {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    border-bottom: 1px solid #e9ecef;
+    border-radius: 1rem 1rem 0 0;
+    background-color: #f8f9fa;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+    border-radius: 0 0 1rem 1rem;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item {
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+}
+
+/* Input Groups */
+.input-group .form-control {
+    border-left: none;
+}
+
+.input-group .btn {
+    border-right: none;
+}
+
+.input-group:focus-within .form-control,
+.input-group:focus-within .btn {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Progress */
+.progress {
+    height: 1rem;
+    border-radius: 0.5rem;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    border-radius: 0.5rem;
+}
+
+/* Utilities */
+.shadow-sm {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+}
+
+.shadow {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    .jumbotron {
+        padding: 2rem 1rem;
+    }
+    
+    .jumbotron h1 {
+        font-size: 2rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Widget Styles (برای اپ‌های کلاینت) */
+.central-widget {
+    border-radius: 0.75rem;
+    padding: 1rem;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.wallet-widget {
+    text-align: center;
+}
+
+.wallet-widget .balance {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #28a745;
+    margin-bottom: 1rem;
+}
+
+.wallet-widget .amount {
+    font-size: 2rem;
+}
+
+.wallet-widget .currency {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-right: 0.5rem;
+}
+
+.wallet-actions .btn {
+    margin: 0 0.25rem;
+}
+
+/* Error States */
+.error-message {
+    border-radius: 0.5rem;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+/* Success States */
+.is-valid {
+    border-color: #28a745 !important;
+}
+
+.is-valid:focus {
+    border-color: #28a745 !important;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .card-header {
+        background-color: #4a5568;
+        color: #e2e8f0;
+    }
+}
+
+/* Print styles */
+@media print {
+    .btn, .navbar, .modal, .alert-dismissible .btn-close {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #dee2e6 !important;
+        box-shadow: none !important;
+    }
+}

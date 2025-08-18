@@ -1,0 +1,268 @@
+/* استایل‌های داشبورد مدیریت */
+
+/* کارت‌های آمار */
+.card.border-left-primary {
+    border-left: 4px solid #007bff !important;
+}
+
+.card.border-left-success {
+    border-left: 4px solid #28a745 !important;
+}
+
+.card.border-left-info {
+    border-left: 4px solid #17a2b8 !important;
+}
+
+.card.border-left-warning {
+    border-left: 4px solid #ffc107 !important;
+}
+
+/* Navigation */
+.navbar-dark .navbar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+/* کارت‌ها */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* دکمه‌ها */
+.btn-copy {
+    cursor: pointer;
+}
+
+.btn-copy:hover {
+    background-color: #e9ecef;
+}
+
+/* جدول‌ها */
+.table-responsive {
+    border-radius: 0.375rem;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    border-top: none;
+    font-weight: 600;
+}
+
+/* Badge ها */
+.badge {
+    font-size: 0.75em;
+}
+
+/* آیکون‌ها */
+.fa-2x {
+    opacity: 0.3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .btn-group {
+        flex-direction: column;
+    }
+    
+    .btn-group .btn {
+        border-radius: 0.375rem !important;
+        margin-bottom: 2px;
+    }
+    
+    .card-header h5 {
+        font-size: 1rem;
+    }
+}
+
+/* Loading states */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Form styles */
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Alert styles */
+.alert {
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.alert-dismissible .btn-close {
+    padding: 0.75rem 1rem;
+}
+
+/* Modal styles */
+.modal-content {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    border-bottom: 1px solid #dee2e6;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+    border-radius: 0 0 0.75rem 0.75rem;
+}
+
+/* Stats cards animation */
+.card.border-left-primary:hover,
+.card.border-left-success:hover,
+.card.border-left-info:hover,
+.card.border-left-warning:hover {
+    transform: translateY(-3px);
+}
+
+/* Code blocks */
+code {
+    background-color: #f8f9fa;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+}
+
+/* Quick links */
+.btn-outline-primary:hover,
+.btn-outline-success:hover,
+.btn-outline-info:hover,
+.btn-outline-warning:hover {
+    transform: translateY(-1px);
+}
+
+/* Text utilities */
+.text-xs {
+    font-size: 0.75rem;
+}
+
+.text-gray-800 {
+    color: #495057 !important;
+}
+
+.text-gray-300 {
+    color: #6c757d !important;
+}
+
+/* Empty state */
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+.fa-4x {
+    font-size: 4em;
+    opacity: 0.3;
+}
+
+/* Input groups */
+.input-group .form-control {
+    border-left: none;
+}
+
+.input-group .btn {
+    border-right: none;
+}
+
+/* Plugin status indicators */
+.plugin-active {
+    color: #28a745;
+}
+
+.plugin-inactive {
+    color: #6c757d;
+}
+
+.plugin-error {
+    color: #dc3545;
+}
+
+/* Drag and drop styles (for future plugin upload) */
+.drag-drop-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.drag-drop-area:hover {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+}
+
+.drag-drop-area.dragover {
+    border-color: #007bff;
+    background-color: #e7f3ff;
+}
+
+/* Progress bars */
+.progress {
+    height: 1rem;
+    border-radius: 0.5rem;
+}
+
+.progress-bar {
+    border-radius: 0.5rem;
+}
+
+/* Timeline styles (for logs) */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #dee2e6;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -0.75rem;
+    top: 0.5rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: #007bff;
+    border: 2px solid #fff;
+}
+
+/* Search and filter styles */
+.search-box {
+    position: relative;
+}
+
+.search-box .form-control {
+    padding-right: 2.5rem;
+}
+
+.search-box .search-icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}

@@ -1,0 +1,26 @@
+a:5:{s:4:"html";s:932:"<div class="card border-primary">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">پیام خوش‌آمدگویی</h5>
+    </div>
+    <div class="card-body">
+        <h4>سلام کاربر گرامی!</h4>
+        <p>به سیستم اپ مرکزی خوش آمدید.</p>
+        <button class="btn btn-primary" onclick="getTime()">دریافت زمان</button>
+        <div id="timeResult" class="mt-3"></div>
+    </div>
+</div>
+
+<script>
+function getTime() {
+    callCentralAPI('hello-test', 'time', {})
+        .then(response => {
+            if (response.success) {
+                document.getElementById('timeResult').innerHTML = 
+                    `<div class="alert alert-success">
+                        زمان: ${response.data.time}<br>
+                        تاریخ: ${response.data.date}
+                    </div>`;
+            }
+        });
+}
+</script>";s:7:"expires";i:1755376508;s:7:"created";i:1755372908;s:6:"plugin";s:10:"testplugin";s:4:"view";s:8:"greeting";}
